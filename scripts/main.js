@@ -133,7 +133,7 @@ let countdown = setInterval(() => {
 
     if ( distance > 0 )
     {
-        document.getElementById( "info-countdown" ).innerText = 
+        document.getElementById( "info-countdown" ).innerText = "- " +
             Math.floor( distance / (1000 * 60 * 60 * 24)) + " d " +
             Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + " h " +
             Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + " m " +
@@ -145,3 +145,39 @@ let countdown = setInterval(() => {
         document.getElementById( "info-countdown" ).innerText = "available now";
     }
 }, 1000 );
+
+
+let socialTransitionState = {};
+for ( let item of document.getElementsByClassName( "social-item" ) )
+{
+    socialTransitionState[item.dataset.social] = true;
+
+    item.addEventListener( "transitionend", e => {
+        if ( e.propertyName == "color" && e.target.localName == "i" )
+        {
+            //if ( !socialTransitionState[e.target.parentNode.dataset.social] )
+            if ( !socialTransitionState[item.dataset.social] )
+            {
+                let tmpTransition = item.style.transition;
+                item.style.transition = "none";
+
+                item.classList.toggle( "radial-out" );
+                item.classList.toggle( "radial-out-" + item.dataset.social );
+                item.classList.toggle( "linear-in" );
+
+                setTimeout(() => {
+                    item.style.transition = tmpTransition;
+                    item.classList.toggle( "linear-in" );
+                }, 500);
+            }
+            else
+            {
+                item.classList.toggle( "radial-out" );
+                item.classList.toggle( "radial-out-" + item.dataset.social );
+            }
+
+            //socialTransitionState[e.target.parentNode.dataset.social] = !socialTransitionState[e.target.parentNode.dataset.social];
+            socialTransitionState[item.dataset.social] = !socialTransitionState[item.dataset.social];
+        }
+    });
+}

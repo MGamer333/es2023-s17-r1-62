@@ -36,6 +36,7 @@
 
         border-bottom: 1px solid transparent;
         background: black;
+        backface-visibility: hidden;
       }
     }
 
@@ -49,6 +50,22 @@
       top: 50%;
       transform: translate(0, -50%);
 
+      @media screen and (max-width: $desktop-width)
+      {
+        padding: 0 70px;
+      }
+
+      @media screen and (max-width: $phone-width)
+      {
+        padding: 0 40px;
+      }
+
+      @media screen and (max-height: $phone-height)
+      {
+        top: 10%;
+        transform: translate(0,0);
+      }
+
       h1, h2, h3
       {
         color: white;
@@ -60,6 +77,16 @@
         font-size: 20px;
         font-weight: 900;
         margin-bottom: 20px;
+
+        @media screen and (max-width: $tablet-width)
+        {
+          font-size: 15px;
+        }
+
+        @media screen and (max-width: $phone-width)
+        {
+          font-size: 13px;
+        }
       }
 
       h1
@@ -69,6 +96,31 @@
         width: 60vw;
         margin-bottom: 20px;
         width: 60vw;
+
+        @media screen and (max-width: $desktop-width)
+        {
+          width: 80vw;
+        }
+
+        @media screen and (max-width: $tablet-width)
+        {
+          font-size: 60px;
+        }
+
+        @media screen and (max-width: $phone-width)
+        {
+          font-size: 50px;
+        }
+
+        @media screen and (max-height: $tablet-height)
+        {
+          font-size: 35px;
+        }
+
+        @media screen and (max-height: $phone-height)
+        {
+          font-size: 30px;
+        }
       }
 
       h3
@@ -76,6 +128,18 @@
         width: 40vw;
         font-weight: 300;
         margin-bottom: 50px;
+
+        @media screen and (max-width: $tablet-width)
+        {
+          font-size: 15px;
+          width: 55vw;
+        }
+
+        @media screen and (max-width: $phone-width)
+        {
+          font-size: 13px;
+          width: 65vw;
+        }
       }
 
       .landing-information-container
@@ -87,10 +151,46 @@
         width: 60vw;
         padding: 20px 40px;
 
+        @media screen and (max-width: $desktop-width)
+        {
+          width: 80vw;
+        }
+
+        @media screen and (max-width: $tablet-width)
+        {
+          padding: 10px 20px;
+        }
+
+        @media screen and (max-width: $mini-tablet-width)
+        {
+          #info-countdown
+          {
+            display: none;
+          }
+        }
+
+        @media screen and (max-width: $phone-width)
+        {
+          padding: 15px 20px;
+          flex-direction: column;
+          width: 50%;
+        }
+
+        @media screen and (max-width: $mini-phone-width)
+        {
+          width: 70%;
+        }
+
         .info-group
         {
           width: 33.33%;
           padding-left: 40px;
+
+          @media screen and (max-width: $phone-width)
+          {
+            padding-left: 0;
+            width: 100%;
+          }
 
           &:nth-child(1)
           {
@@ -111,6 +211,16 @@
             margin-bottom: 5px;
             font-size: 18px;
             color: rgba(0,0,0,.8);
+
+            @media screen and (max-width: $tablet-width)
+            {
+              font-size: 14px;
+            }
+
+            @media screen and (max-width: $tablet-width)
+            {
+              margin-bottom: 0;
+            }
           }
 
           h2
@@ -119,6 +229,16 @@
             font-size: 15px;
             color: rgba(0,0,0,.6);
             margin-bottom: -5px;
+
+            @media screen and (max-width: $tablet-width)
+            {
+              font-size: 11px;
+            }
+
+            @media screen and (max-width: $tablet-width)
+            {
+              margin-bottom: 5px;
+            }
           }
 
           .info-inline
@@ -145,18 +265,161 @@
     .landing-social-container
       {
         position: fixed;
-        bottom: 150px;
+        bottom: 50px;
         width: 100vw;
         z-index: 4;
         padding: 0 150px;
+        display: flex;
+        flex-direction: row;
+
+        @media screen and (max-width: $desktop-width)
+        {
+          padding: 0 70px;
+        }
+
+        @media screen and (max-width: $phone-width)
+        {
+          padding: 0 40px;
+        }
 
         .social-item
         {
           position: relative;
+          display: block;
+          overflow: hidden;
+
           background: white;
-          border-radius: 5px;
-          width: 50px;
-          height: 50px;
+          border-radius: 6px;
+          width: 55px;
+          height: 55px;
+          margin-right: 15px;
+          max-width: 55px;
+
+          transition: all 300ms ease-in-out;
+
+          i 
+          {
+            position: absolute;
+            font-size: 21px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 300ms ease-in-out, color 80ms;
+
+            @supports (-moz-appearance:none) 
+            {
+              transition: all 300ms ease-in-out;
+            }
+          }
+
+          &.facebook 
+          {
+            color: $facebook-color;
+            border-color: $facebook-color;
+            background: {
+              image: linear-gradient(45deg, $facebook-color 50%, transparent 50%);
+              position: 100%;
+              size: 400%;
+            }
+          }
+
+          &.pinterest
+          {
+            color: $pinterest-color;
+            background: {
+              image: linear-gradient(45deg, $pinterest-color 50%, transparent 50%);
+              position: 100%;
+              size: 400%;
+            }
+            border-color: $pinterest-color;
+          }
+
+          &.twitter
+          {
+            color: $twitter-color;
+            background: {
+              image: linear-gradient(45deg, $twitter-color 50%, transparent 50%);
+              position: 100%;
+              size: 400%;
+            }
+            border-color: $twitter-color;
+          }
+
+          &.tumblr
+          {
+            color: $tumblr-color;
+            background: {
+              image: linear-gradient(45deg, $tumblr-color 50%, transparent 50%);
+              position: 100%;
+              size: 400%;
+            }
+            border-color: $tumblr-color;
+          }
+
+          &.linear-in:hover
+          {
+            background-position: 0;
+            color: white;
+            
+            i
+            {
+              font-size: 25px;
+            }
+          }
         }
       }
+}
+
+
+.radial-out
+{
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  transition: color 600ms;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    border-radius: 100%;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    transition: 600ms ease-out;
+  }
+
+  &:hover:before {
+    transform: scale(0);
+  }
+}
+
+.radial-out-facebook
+{
+  background-color: $facebook-color !important;
+}
+
+.radial-out-pinterest
+{
+  background-color: $pinterest-color !important;
+}
+
+.radial-out-twitter
+{
+  background-color: $twitter-color !important;
+}
+
+.radial-out-tumblr
+{
+  background-color: $tumblr-color !important;
 }
