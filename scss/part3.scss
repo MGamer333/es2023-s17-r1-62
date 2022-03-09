@@ -353,7 +353,7 @@ header
                 background: darken(rgb(168, 168, 168), 9%);
             }
 
-            &:active
+            &:active, &.active
             {
                 background: darken(rgb(168, 168, 168), 25%);
             }
@@ -377,6 +377,16 @@ header
             &.all
             {
                 border-radius: 5px;
+            }
+
+            p
+            {
+                pointer-events: none;
+            }
+
+            i
+            {
+                pointer-events: none;
             }
         }
 
@@ -446,12 +456,11 @@ header
     .workspace
     {
         display: none;
-        background-color: white;
     }
 
     .sorting-grid
     {
-        background-color: white;
+        background: white;
         margin: 25px 0;
         display: grid;
         grid-template-columns: 60px repeat(8, 120px);
@@ -517,7 +526,7 @@ header
                 //border: 1px solid black;
                 //border-bottom: none;
 
-                &::before
+                &::after
                 {
                     //border: 1px solid black;
                     z-index: -1;
@@ -538,7 +547,7 @@ header
             {
                 border-radius: 5px 9px 9px 5px;
 
-                &::before
+                &::after
                 {
                     //border: 1px solid black;
                     z-index: -1;

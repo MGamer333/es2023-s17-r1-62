@@ -6432,7 +6432,7 @@ header .hamburger-navigation i {
   background: #919191;
 }
 
-.organisation-tool .action-button-container button:active {
+.organisation-tool .action-button-container button:active, .organisation-tool .action-button-container button.active {
   background: #686868;
 }
 
@@ -6451,6 +6451,14 @@ header .hamburger-navigation i {
 
 .organisation-tool .action-button-container button.all {
   border-radius: 5px;
+}
+
+.organisation-tool .action-button-container button p {
+  pointer-events: none;
+}
+
+.organisation-tool .action-button-container button i {
+  pointer-events: none;
 }
 
 .organisation-tool .action-button-container .btn {
@@ -6515,11 +6523,10 @@ header .hamburger-navigation i {
 
 .organisation-tool .workspace {
   display: none;
-  background-color: white;
 }
 
 .organisation-tool .sorting-grid {
-  background-color: white;
+  background: white;
   margin: 25px 0;
   display: -ms-grid;
   display: grid;
@@ -6588,7 +6595,7 @@ header .hamburger-navigation i {
   border-radius: 5px 5px 9px 9px;
 }
 
-.organisation-tool .sorting-grid .ruler .ruler-top::before {
+.organisation-tool .sorting-grid .ruler .ruler-top::after {
   z-index: -1;
   content: "";
   position: absolute;
@@ -6608,7 +6615,7 @@ header .hamburger-navigation i {
   border-radius: 5px 9px 9px 5px;
 }
 
-.organisation-tool .sorting-grid .ruler .ruler-side::before {
+.organisation-tool .sorting-grid .ruler .ruler-side::after {
   z-index: -1;
   content: "";
   position: absolute;

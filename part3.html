@@ -56,15 +56,15 @@
                 <div class="group">
                     <h3>Load prevoius section</h3>
                     <div class="btn-group">
-                        <button class="btn left">
+                        <button onclick="loadSample()" class="btn left">
                             <i style="padding-bottom: 3px" class="fa fa-solid fa-book"></i>
-                            <p onclick="loadSample()">From sample</p>
+                            <p">From sample</p>
                         </button>
                         <button class="btn middle">
                             <i style="padding-bottom: 4px" class="fa fa-solid fa-upload"></i>
                             <p>From file</p>
                         </button>
-                        <button class="btn right">
+                        <button onclick="load()" class="btn right">
                             <i style="padding-bottom: 3px" class="fa fa-solid fa-database"></i>
                             <p>From session</p>
                         </button>
@@ -87,17 +87,23 @@
 
                 <div class="group">
                     <h3>Selection</h3>
-                    <button class="btn all">
-                        <i style="padding-bottom: 4px" class="fa fa-regular fa-trash"></i>
-                        <p>Delete</p>
-                    </button>
+                    <div class="btn-group">
+                        <button onclick="clearAllSeat()" class="btn left">
+                            <i style="padding-bottom: 4px" class="fa fa-regular fa-trash"></i>
+                            <p>Clear</p>
+                        </button>
+                        <button onclick="deleteSelected(event)" style="border-left: none;" class="btn right">
+                            <i style="padding-bottom: 4px" class="fa fa-regular fa-trash"></i>
+                            <p>Delete</p>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="group">
                     <h3 style="color: white">-</h3>
-                    <button class="btn all">
+                    <button  onclick="goFullScreen()" class="btn all">
                         <i style="padding-bottom: 3px" class="fa fa-regular fa-expand"></i>
-                        <p onclick="goFullScreen()">Go to full screen</p>
+                        <p>Go to full screen</p>
                     </button>
                 </div>
             </div>

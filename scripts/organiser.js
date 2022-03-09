@@ -4,6 +4,7 @@
  */
 var workspaceLoaded = false;
 var workspace = document.getElementById( "workspace" );
+var deleteMode = false;
 
 
 /* Link handler function */
@@ -14,16 +15,65 @@ for ( let link of document.getElementsByClassName( "scroll-link" ) )
     })
 }
 
-/* Remove all seats */
-const clearAllSeat = () => {
+
+/* Save seats from local storage */
+const save = () => {
+    let array = [];
+
     for ( let item of document.querySelectorAll( ".seat" ) )
     {
-        item.innerText = "";
+        if ( item.childElementCount == 1 )
+        {
+            array.push({
+                x: item.dataset.x,
+                y: item.dataset.y,
+                name: item.children[0].value
+            });
+        }
+    }
+
+    if ( array.length > 0 )
+    {
+        localStorage.setItem( 'savedSeats', JSON.stringify( array ) );
+    }
+    else
+    {
+        localStorage.removeItem( 'savedSeats' );
     }
 }
 
 
-/* Load sample */
+/* Load seats from local storage */
+const load = () => {
+    if ( localStorage.getItem( 'savedSeats' ) !== null )
+    {
+        let parsedSeats = JSON.parse( localStorage.getItem( 'savedSeats' ) );
+
+        clearAllSeat(false);
+        parsedSeats.forEach( element => {
+            let tmp = generateSpan( element.name );
+                tmp.dataset.xy = element.x + element.y;
+
+            getSeat( element.x, element.y ).appendChild( tmp );
+        });
+
+        alert( "Saved seats were successfully restored." );
+    }
+}
+
+
+/* Remove all seats */
+const clearAllSeat = saveBool => {
+    for ( let item of document.querySelectorAll( ".seat" ) )
+    {
+        item.innerText = "";
+    }
+
+    if ( saveBool == null || saveBool ) save();
+}
+
+
+/* Load sample seat layout */
 const loadSample = () =>
 {
     if ( workspaceLoaded )
@@ -40,14 +90,26 @@ const loadSample = () =>
         getSeat( 1, 1 ).appendChild( andrew );
         getSeat( 1, 2 ).appendChild( robert );
         getSeat( 1, 3 ).appendChild( steve );
+
+        save();
     }
 }
+
 
 /* Get the selected seat DOM */
 const getSeat = ( x, y ) => {
     return document.querySelector(`.seat[data-x="${x}"][data-y="${y}"]`);
 }
 
+
+/* Delete selected seat */
+const deleteSelected = event => {
+    event.target.classList.toggle( "active" );
+    deleteMode = !deleteMode;
+}
+
+
+/* Make textarea editable or readonly */
 const textareaDoubleClick = event => {
     console.log(event.target.readonly);
     if ( event.target.readOnly )
@@ -61,6 +123,29 @@ const textareaDoubleClick = event => {
 }
 
 
+/* Click to textarea - delete it */
+const textAreaClick = event => {
+    if ( deleteMode )
+    {
+        event.target.remove();
+        save();
+    }
+}
+
+
+/* Add new seat */
+const addSeat = event => {
+    if ( event.target.nodeName === "DIV" )
+    {
+        let newSeat = generateSpan( "New" );
+            newSeat.dataset.xy = event.target.dataset.x + event.target.dataset.y;
+        getSeat( event.target.dataset.x, event.target.dataset.y ).appendChild( newSeat );
+
+        save();
+    }
+}
+
+
 /* Generate draggable span element */
 const generateSpan = name => {
     let span = document.createElement( "textarea" );
@@ -69,6 +154,7 @@ const generateSpan = name => {
     
     span.addEventListener( "dragstart", drag, false );
     span.addEventListener( "dblclick", textareaDoubleClick, false );
+    span.addEventListener( "click", textAreaClick, false );
     span.value = name;
 
     return span;
@@ -81,12 +167,13 @@ const goFullScreen = () => {
 }
 
 
-
-/* Drag and drop event handlers */
+/* Allow element to drag and drop */
 const allowDrop = event => {
     event.preventDefault();
 }
 
+
+/* Drag event handler */
 const drag = event => {
     console.log(event);
 
@@ -97,6 +184,8 @@ const drag = event => {
     //event.dataTransfer.effectAllowed = "copy";
 }
 
+
+/* Drop event handler */
 const drop = event => {
     console.log(event);
 
@@ -133,10 +222,12 @@ const drop = event => {
         event.preventDefault();
     }
     //event.target.children[0].style.opacity = "1";
+
+    save();
 }
 
 
-/* Generate default seats */
+/* Generate default seat placeholders */
 let grid = document.getElementById( "sorting-grid" );
 for ( let x = 1; x < 5; x++ )
 {
@@ -151,6 +242,7 @@ for ( let x = 1; x < 5; x++ )
 
         seat.addEventListener( "drop", drop, false );
         seat.addEventListener( "dragover", allowDrop, false );
+        seat.addEventListener( "dblclick", addSeat, false );
 
         grid.appendChild( seat );
     }
@@ -162,3 +254,5 @@ document.getElementById( "loading-workspace" ).style.display = "none";
 
 workspace.style.display = "block";
 workspaceLoaded = true;
+
+load();
