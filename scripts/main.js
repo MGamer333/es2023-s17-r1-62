@@ -254,50 +254,68 @@ for ( let item of document.getElementsByClassName( "navigation" )[0].children )
 /**
  * Scrolling tracker
  */
- let scrollTrigger = 90;
- const scrollChange = e => {
-     // Navigation show, scroll to top button show
-     if ( document.body.scrollTop > scrollTrigger || document.documentElement.scrollTop > scrollTrigger )
-     {
-         document.getElementsByTagName( "header" )[0].classList.add( "navigation-scroll" );
-         document.getElementsByClassName( "scroll-to-top" )[0].style.right = "20px";
-     }
-     else
-     {
-         document.getElementsByTagName( "header" )[0].classList.remove( "navigation-scroll" );
-         document.getElementsByClassName( "scroll-to-top" )[0].style.right = "-50px";
-     }
- 
-     // Scroll button color change
-     let scrollBtn = document.getElementsByClassName( "scroll-to-top" )[0];
-     scrollBtn.style.pointerEvents = "none";
- 
-     let x = scrollBtn.offsetLeft;
-     let y = scrollBtn.offsetTop;
-     scrollBtn.style.pointerEvents = "all";
- 
-     if ( document.elementFromPoint( x, y ).dataset.bg == "dark" )
-     {
-         scrollBtn.classList.add( "bg-inverse" );
-     }
-     else
-     {
-         scrollBtn.classList.remove( "bg-inverse" );
-     }
- 
-     // Navbar active effect
-     for ( let i = anchors.length-1; i >= 0; i-- )
-     {
-        if ( document.body.scrollTop > anchors[i].offset || document.documentElement.scrollTop > anchors[i].offset-60 )
-        {
-            for ( let tmp in navItems )
-            {
-                navItems[tmp].classList.remove( "active" );
-            }
-            navItems[anchors[i].name].classList.add( "active" );
+let scrollTrigger = 90;
+const scrollChange = e => {
+    // Navigation show, scroll to top button show
+    if ( document.body.scrollTop > scrollTrigger || document.documentElement.scrollTop > scrollTrigger )
+    {
+        document.getElementsByTagName( "header" )[0].classList.add( "navigation-scroll" );
+        document.getElementsByClassName( "scroll-to-top" )[0].style.right = "20px";
+    }
+    else
+    {
+        document.getElementsByTagName( "header" )[0].classList.remove( "navigation-scroll" );
+        document.getElementsByClassName( "scroll-to-top" )[0].style.right = "-50px";
+    }
 
-            break;
+    // Scroll button color change
+    let scrollBtn = document.getElementsByClassName( "scroll-to-top" )[0];
+    scrollBtn.style.pointerEvents = "none";
+
+    let x = scrollBtn.offsetLeft + scrollBtn.clientWidth;
+    let y = scrollBtn.offsetTop + scrollBtn.clientHeight;
+    scrollBtn.style.pointerEvents = "all";
+
+    console.log(scrollBtn)
+    if ( document.elementFromPoint( x, y ) !== null && document.elementFromPoint( x, y ).dataset.bg == "dark" )
+    {
+        scrollBtn.classList.add( "bg-inverse" );
+    }
+    else
+    {
+        scrollBtn.classList.remove( "bg-inverse" );
+    }
+
+    // Navbar active effect
+    for ( let i = anchors.length-1; i >= 0; i-- )
+    {
+    if ( document.body.scrollTop > anchors[i].offset || document.documentElement.scrollTop > anchors[i].offset-60 )
+    {
+        for ( let tmp in navItems )
+        {
+            navItems[tmp].classList.remove( "active" );
         }
-     }
- }
- window.addEventListener( "scroll", scrollChange, false );
+        navItems[anchors[i].name].classList.add( "active" );
+
+        break;
+    }
+    }
+}
+window.addEventListener( "scroll", scrollChange, false );
+
+
+/**
+ * Mobile navigation handler
+ */
+document.getElementById( "hamburger-nav" ).addEventListener( "click", () => {
+    document.getElementById( "full-page-navigation" ).classList.toggle( "active" );
+    document.getElementsByTagName( "body" )[0].classList.toggle( "active-hamburger" );
+});
+
+for ( let item of document.getElementsByClassName( "nav-exit" ) )
+{
+    item.addEventListener( "click", () => {
+        document.getElementById( "full-page-navigation" ).classList.toggle( "active" );
+        document.getElementsByTagName( "body" )[0].classList.toggle( "active-hamburger" );
+    })
+}
