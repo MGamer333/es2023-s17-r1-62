@@ -5988,6 +5988,10 @@ button, [type="button"], [type="reset"], [type="submit"] {
   background: black;
 }
 
+.full-width-landing .primary {
+  color: #ea4c89;
+}
+
 .full-width-landing .landing-container {
   z-index: 1;
   position: fixed;
@@ -6022,7 +6026,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
   position: absolute;
   z-index: 999;
   width: 100%;
-  padding: 0 150px;
+  padding: 0 200px;
   font-family: "Sofia Pro", Avenir, Helvetica Neue, Helvetica, Arial, sans-serif;
   top: 50%;
   -webkit-transform: translate(0, -50%);
@@ -6141,7 +6145,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
       -ms-flex-direction: row;
           flex-direction: row;
   width: 60vw;
-  padding: 20px 40px;
+  padding: 18px 35px 18px 35px;
 }
 
 @media screen and (max-width: 1460px) {
@@ -6204,7 +6208,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
 }
 
 .full-width-landing .landing-content-container .landing-information-container .info-group h1 {
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   font-size: 18px;
   color: rgba(0, 0, 0, 0.8);
 }
@@ -6262,7 +6266,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
   bottom: 50px;
   width: 100vw;
   z-index: 4;
-  padding: 0 150px;
+  padding: 0 200px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
