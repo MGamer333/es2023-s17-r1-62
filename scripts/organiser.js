@@ -237,7 +237,7 @@ const drop = event => {
 
 
 const exportSeats = () => {
-    let text = "# VIP List\n";
+    let text = "# VIP List\n\n";
     let counter = 1;
 
     for ( let item of document.querySelectorAll( '.seat' ) )
