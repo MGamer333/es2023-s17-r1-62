@@ -118,35 +118,37 @@ let landingPlayer = document.getElementsByClassName( "landing-video-player" )[0]
 
 
 
-//landingPlayer.addEventListener( "ended", landingVideoHandler, false );
-//landingVideoPlayer( landingPlayer, 0 );
-//landingVideoMonitor( landingPlayer );
 
 /**
  * Countdown timer for the website reveal
  */
-let countdown = setInterval(() => {
-    let countdownDate = new Date("2022-03-19 0:0:0").getTime();
-    let currentDate = new Date().getTime();
+if ( document.getElementById( "info-countdown" ) !== null )
+{
+    let countdown = setInterval(() => {
+        let countdownDate = new Date("2022-03-19 0:0:0").getTime();
+        let currentDate = new Date().getTime();
+    
+        let distance = countdownDate - currentDate;
+    
+        if ( distance > 0 )
+        {
+            document.getElementById( "info-countdown" ).innerText = "- " +
+                Math.floor( distance / (1000 * 60 * 60 * 24)) + " d " +
+                Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + " h " +
+                Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + " m " +
+                Math.floor((distance % (1000 * 60)) / 1000) + " s";
+        }
+        else 
+        {
+            clearInterval( countdown );
+            document.getElementById( "info-countdown" ).innerText = "available now";
+        }
+    }, 1000 );
+}
 
-    let distance = countdownDate - currentDate;
-
-    if ( distance > 0 )
-    {
-        document.getElementById( "info-countdown" ).innerText = "- " +
-            Math.floor( distance / (1000 * 60 * 60 * 24)) + " d " +
-            Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + " h " +
-            Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + " m " +
-            Math.floor((distance % (1000 * 60)) / 1000) + " s";
-    }
-    else 
-    {
-        clearInterval( countdown );
-        document.getElementById( "info-countdown" ).innerText = "available now";
-    }
-}, 1000 );
-
-
+/**
+ * Social media button animation
+ */
 let socialTransitionState = {};
 for ( let item of document.getElementsByClassName( "social-item" ) )
 {
@@ -181,3 +183,121 @@ for ( let item of document.getElementsByClassName( "social-item" ) )
         }
     });
 }
+
+
+/**
+ * Scroll to functions
+ */
+const scrollToAnchor = event => {
+    if ( event !== null )
+    {
+        let element = document.getElementById( event.target.parentNode.dataset.link );
+        let offset = element.offsetTop - 50 < 0 ? 0 : element.offsetTop - 50;
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+        });
+    }
+}
+
+let scrollToTopBtn = document.getElementsByClassName( "scroll-to-top" )[0];
+scrollToTopBtn.addEventListener( "click", e => {
+    window.scrollTo( {top: 0, behavior: 'smooth'} );
+}, false );
+
+
+/**
+ * FAQ collapsible box handler
+ */
+for ( let item of document.getElementsByClassName( "collapsible" ) )
+{
+    item.addEventListener( "click", e => {
+        e.target.classList.toggle( "active" );
+
+        let content = e.target.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+    });
+}
+
+
+/**
+ * Page scroll link setup
+ */
+for ( let item of document.getElementsByClassName( "scroll-link" ) )
+{
+    if ( item.nodeName === "DIV" || item.nodeName === "BUTTON" )
+    {
+        item.addEventListener( "click", scrollToAnchor, false );
+    }
+}
+
+
+/**
+ * Navbar active link selectors
+ */
+let anchors = [];
+let navItems = {};
+for ( let item of document.getElementsByTagName( "section" ) )
+{
+    anchors.push({
+        offset: item.offsetTop,
+        name: item.id
+    });
+}
+
+for ( let item of document.getElementsByClassName( "navigation" )[0].children )
+{
+    navItems[item.dataset.link] = item;
+}
+
+
+/**
+ * Scrolling tracker
+ */
+ let scrollTrigger = 90;
+ const scrollChange = e => {
+     // Navigation show, scroll to top button show
+     if ( document.body.scrollTop > scrollTrigger || document.documentElement.scrollTop > scrollTrigger )
+     {
+         document.getElementsByTagName( "header" )[0].classList.add( "navigation-scroll" );
+         document.getElementsByClassName( "scroll-to-top" )[0].style.right = "20px";
+     }
+     else
+     {
+         document.getElementsByTagName( "header" )[0].classList.remove( "navigation-scroll" );
+         document.getElementsByClassName( "scroll-to-top" )[0].style.right = "-50px";
+     }
+ 
+     // Scroll button color change
+     let scrollBtn = document.getElementsByClassName( "scroll-to-top" )[0];
+     scrollBtn.style.pointerEvents = "none";
+ 
+     let x = scrollBtn.offsetLeft;
+     let y = scrollBtn.offsetTop;
+     scrollBtn.style.pointerEvents = "all";
+ 
+     if ( document.elementFromPoint( x, y ).dataset.bg == "dark" )
+     {
+         scrollBtn.classList.add( "bg-inverse" );
+     }
+     else
+     {
+         scrollBtn.classList.remove( "bg-inverse" );
+     }
+ 
+     // Navbar active effect
+     for ( let i = anchors.length-1; i >= 0; i-- )
+     {
+        if ( document.body.scrollTop > anchors[i].offset || document.documentElement.scrollTop > anchors[i].offset-60 )
+        {
+            for ( let tmp in navItems )
+            {
+                navItems[tmp].classList.remove( "active" );
+            }
+            navItems[anchors[i].name].classList.add( "active" );
+
+            break;
+        }
+     }
+ }
+ window.addEventListener( "scroll", scrollChange, false );
