@@ -5,6 +5,7 @@
 var workspaceLoaded = false;
 var workspace = document.getElementById( "workspace" );
 var deleteMode = false;
+var exportedTextarea = document.getElementById( "exported" );
 
 
 /* Link handler function */
@@ -162,9 +163,17 @@ const generateSpan = name => {
 
 /* Request fullscreen */
 const goFullScreen = () => {
-    let doc = document.getElementById( "sorting-grid" );
-    doc.requestFullscreen();
+    document.getElementById("fullscreen-close").style.display = "block";
+    workspace.requestFullscreen();
 }
+
+const closeFullScreen = () => {
+    document.exitFullscreen();
+}
+
+document.addEventListener( "fullscreenchange", e => {
+  //  document.getElementById("fullscreen-close").style.display = "none";
+});
 
 
 /* Allow element to drag and drop */
@@ -224,6 +233,32 @@ const drop = event => {
     //event.target.children[0].style.opacity = "1";
 
     save();
+}
+
+
+const exportSeats = () => {
+    let text = "# VIP List\n";
+    let counter = 1;
+
+    for ( let item of document.querySelectorAll( '.seat' ) )
+    {
+        if ( item.childElementCount == 1 )
+        {
+            text += "- " + item.children[0].value + " " + counter + "\n";
+            counter++;
+        }
+        else
+        {
+            text += "- \n";
+        }
+    }
+
+    exportedTextarea.value = text;
+}
+
+const copyToClipboard = () => {
+    exportSeats();
+    navigator.clipboard.writeText(exportedTextarea.value);
 }
 
 

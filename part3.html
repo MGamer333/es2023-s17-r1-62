@@ -74,11 +74,11 @@
                 <div class="group">
                     <h3>Export section</h3>
                     <div class="btn-group">
-                        <button class="btn left">
+                        <button onclick="exportSeats()" class="btn left">
                             <i style="padding-bottom: 4px" class="fa fa-regular fa-download"></i>
-                            <p>Into file</p>
+                            <p>Export</p>
                         </button>
-                        <button style="border-left: none" class="btn right">
+                        <button onclick="copyToClipboard()" style="border-left: none" class="btn right">
                             <i style="padding-bottom: 4px" class="fa fa-regular fa-clipboard"></i>
                             <p>Copy to clipboard</p>
                         </button>
@@ -126,16 +126,12 @@
                     <div class="ruler side" style="grid-area: r2;"><div class="ruler-container ruler-side"><p>2</p></div></div>
                     <div class="ruler side" style="grid-area: r3;"><div class="ruler-container ruler-side"><p>3</p></div></div>
                     <div class="ruler side" style="grid-area: r4;"><div class="ruler-container ruler-side"><p>4</p></div></div>
-    
-                    
                 </div>
-    
-                <h2 class="title">Details</h2>
-                <div class="stat-group">
-                    <h3>Empty seats: <span class="stat" id="empty">32</span></h3>
-                    <h3>Taken seats: <span class="stat" id="full">0</span></h3>
-                </div>
+                <i onclick="closeFullScreen()" id="fullscreen-close"  class="fa close fa-solid fa-plus"></i>
             </div>
+
+            <h2 class="title">Exported view</h2>
+            <textarea class="exported" name="" id="exported" cols="80" rows="10"></textarea>
         </div>
     </section>
 

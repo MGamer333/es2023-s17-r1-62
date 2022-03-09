@@ -456,11 +456,33 @@ header
     .workspace
     {
         display: none;
+        background: white;
+        position: relative;
+
+        .close
+        {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            transform: rotate(45deg);
+            font-size: 30px;
+            color: red;
+            cursor: pointer;
+        }
+    }
+
+    .exported
+    {
+        border-radius: 5px;
+        border: .5px solid darken(rgb(168, 168, 168), 45%);
+        padding: 10px;
+        outline: none;
     }
 
     .sorting-grid
     {
-        background: white;
+        position: relative;
         margin: 25px 0;
         display: grid;
         grid-template-columns: 60px repeat(8, 120px);
@@ -473,7 +495,13 @@ header
 
         &:fullscreen
         {
-            
+            &::before
+            {
+                position: absolute;
+                content: "asd";
+                right: 10px;
+                top: 10px;
+            }
         }
 
         .ruler

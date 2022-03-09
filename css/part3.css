@@ -6523,10 +6523,31 @@ header .hamburger-navigation i {
 
 .organisation-tool .workspace {
   display: none;
+  background: white;
+  position: relative;
+}
+
+.organisation-tool .workspace .close {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  font-size: 30px;
+  color: red;
+  cursor: pointer;
+}
+
+.organisation-tool .exported {
+  border-radius: 5px;
+  border: 0.5px solid #353535;
+  padding: 10px;
+  outline: none;
 }
 
 .organisation-tool .sorting-grid {
-  background: white;
+  position: relative;
   margin: 25px 0;
   display: -ms-grid;
   display: grid;
@@ -6535,6 +6556,34 @@ header .hamburger-navigation i {
   -ms-grid-rows: 60px (80px)[4];
       grid-template-rows: 60px repeat(4, 80px);
       grid-template-areas: "r0 ra rb rc rd re rf rg rh" "r1 11 12 13 14 15 16 17 18" "r2 21 22 23 24 25 26 27 28" "r3 31 32 33 34 35 36 37 38" "r4 41 42 43 44 45 46 47 48";
+}
+
+.organisation-tool .sorting-grid:-webkit-full-screen::before {
+  position: absolute;
+  content: "asd";
+  right: 10px;
+  top: 10px;
+}
+
+.organisation-tool .sorting-grid:-moz-full-screen::before {
+  position: absolute;
+  content: "asd";
+  right: 10px;
+  top: 10px;
+}
+
+.organisation-tool .sorting-grid:-ms-fullscreen::before {
+  position: absolute;
+  content: "asd";
+  right: 10px;
+  top: 10px;
+}
+
+.organisation-tool .sorting-grid:fullscreen::before {
+  position: absolute;
+  content: "asd";
+  right: 10px;
+  top: 10px;
 }
 
 .organisation-tool .sorting-grid .ruler {
