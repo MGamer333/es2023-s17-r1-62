@@ -261,6 +261,20 @@ const copyToClipboard = () => {
     navigator.clipboard.writeText(exportedTextarea.value);
 }
 
+const download = () => {
+    let file = 'vip-list.txt';
+    let txt = exportedTextarea.value;
+
+    let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(txt));
+        element.setAttribute('download', file);
+        element.style.display = 'none';
+
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
 
 /* Generate default seat placeholders */
 let grid = document.getElementById( "sorting-grid" );
