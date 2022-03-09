@@ -5852,6 +5852,112 @@ button, [type="button"], [type="reset"], [type="submit"] {
   font-weight: 900;
 }
 
+/* Default body settings */
+body {
+  overflow-x: hidden;
+}
+
+body.active-hamburger {
+  overflow: hidden;
+}
+
+/* Default style for sections */
+section {
+  font-family: "Sofia Pro", Avenir, Helvetica Neue, Helvetica, Arial, sans-serif;
+  width: 100vw;
+  height: auto;
+  position: relative;
+  /* Default settings for container */
+  /* Title settings */
+}
+
+section .container {
+  padding: 0 200px;
+}
+
+@media screen and (max-width: 1380px) {
+  section .container {
+    padding: 0 100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  section .container {
+    padding: 0 50px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  section .container {
+    padding: 0 20px;
+  }
+}
+
+section .content {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 470px) {
+  section .content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+section.mg-container {
+  margin: 80px 0;
+}
+
+section .primary {
+  color: #ea4c89;
+}
+
+section .title {
+  font-size: 50px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 470px) {
+  section .title {
+    font-size: 45px;
+    line-height: 1;
+  }
+}
+
+section .subtitle {
+  margin-bottom: -10px;
+}
+
+@media screen and (max-width: 470px) {
+  section .subtitle {
+    margin-bottom: 5px;
+    font-size: 15px;
+  }
+}
+
+section .title-inverse {
+  color: white;
+}
+
+section .article {
+  text-align: center;
+}
+
+section .description {
+  margin-top: 50px;
+}
+
+section .description h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+section .description p {
+  color: #4d4d4d;
+}
+
 /* Social media button outer animation */
 .radial-out {
   overflow: hidden;

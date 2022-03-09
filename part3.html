@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PopFest in the Castle | VIP Organiser Tool</title>
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/part3.css">
+</head>
+<body>
+    <header class="navigation-scroll">
+        <div class="container">
+            <div class="logo">
+                <p>POPFEST</p>
+            </div>
+            <div class="navigation">
+                <div class="item scroll-link" data-link="index.html">
+                    <p>Home</p>
+                </div>
+                <div class="item scroll-link" data-link="part1.html">
+                    <p>Part 1</p>
+                </div>
+                <div class="item scroll-link" data-link="part2.html">
+                    <p>Part2</p>
+                </div>
+                <div class="item scroll-link active" data-link="#">
+                    <p>Part 3</p>
+                </div>
+            </div>
+            <div class="hamburger-navigation">
+                <i id="hamburger-nav" class="fa fa-regular fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="landing" id="home">
+        <div class="landing-content-container">
+            <div class="container">
+                <div class="landing-content">
+                    <h2>Administration section</h2>
+                    <h1>VIP Seat Organisaton Tool</h1>
+                    <h3>An interactive tool to help organizers arrange VIP seating of the festival</h3>
+                </div>
+            </div>
+        </div>
+        <div class="landing-video">
+            <img src="assets/media/images/concert/sebastian-ervi-Qq2h76kYRFI-unsplash.jpg" alt="">
+        </div>
+    </section>
+
+    <section class="organisation-tool mg-container">
+        <div class="container content">
+            <h2 class="title">Toolbox</h2>
+            <div class="action-button-container">
+                <div class="group">
+                    <h3>Load prevoius section</h3>
+                    <div class="btn-group">
+                        <button class="btn left">
+                            <i style="padding-bottom: 3px" class="fa fa-solid fa-book"></i>
+                            <p onclick="loadSample()">From sample</p>
+                        </button>
+                        <button class="btn middle">
+                            <i style="padding-bottom: 4px" class="fa fa-solid fa-upload"></i>
+                            <p>From file</p>
+                        </button>
+                        <button class="btn right">
+                            <i style="padding-bottom: 3px" class="fa fa-solid fa-database"></i>
+                            <p>From session</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3>Export section</h3>
+                    <div class="btn-group">
+                        <button class="btn left">
+                            <i style="padding-bottom: 4px" class="fa fa-regular fa-download"></i>
+                            <p>Into file</p>
+                        </button>
+                        <button style="border-left: none" class="btn right">
+                            <i style="padding-bottom: 4px" class="fa fa-regular fa-clipboard"></i>
+                            <p>Copy to clipboard</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3>Selection</h3>
+                    <button class="btn all">
+                        <i style="padding-bottom: 4px" class="fa fa-regular fa-trash"></i>
+                        <p>Delete</p>
+                    </button>
+                </div>
+
+                <div class="group">
+                    <h3 style="color: white">-</h3>
+                    <button class="btn all">
+                        <i style="padding-bottom: 3px" class="fa fa-regular fa-expand"></i>
+                        <p onclick="goFullScreen()">Go to full screen</p>
+                    </button>
+                </div>
+            </div>
+
+            <h2 class="title">Seat sorting area</h2>
+            <h4 id="loading-workspace">Loading workspace...</h4>
+
+            <div id="workspace" class="workspace">
+                <div id="sorting-grid" class="sorting-grid">
+                    <div class="ruler" style="grid-area: r0;"></div>
+                    <div class="ruler top" style="grid-area: ra;"><div class="ruler-container ruler-top"><p>A</p></div></div>
+                    <div class="ruler top" style="grid-area: rb;"><div class="ruler-container ruler-top"><p>B</p></div></div>
+                    <div class="ruler top" style="grid-area: rc;"><div class="ruler-container ruler-top"><p>C</p></div></div>
+                    <div class="ruler top" style="grid-area: rd;"><div class="ruler-container ruler-top"><p>D</p></div></div>
+                    <div class="ruler top" style="grid-area: re;"><div class="ruler-container ruler-top"><p>E</p></div></div>
+                    <div class="ruler top" style="grid-area: rf;"><div class="ruler-container ruler-top"><p>F</p></div></div>
+                    <div class="ruler top" style="grid-area: rg;"><div class="ruler-container ruler-top"><p>G</p></div></div>
+                    <div class="ruler top" style="grid-area: rh;"><div class="ruler-container ruler-top"><p>H</p></div></div>
+                    <div class="ruler side" style="grid-area: r1;"><div class="ruler-container ruler-side"><p>1</p></div></div>
+                    <div class="ruler side" style="grid-area: r2;"><div class="ruler-container ruler-side"><p>2</p></div></div>
+                    <div class="ruler side" style="grid-area: r3;"><div class="ruler-container ruler-side"><p>3</p></div></div>
+                    <div class="ruler side" style="grid-area: r4;"><div class="ruler-container ruler-side"><p>4</p></div></div>
+    
+                    
+                </div>
+    
+                <h2 class="title">Details</h2>
+                <div class="stat-group">
+                    <h3>Empty seats: <span class="stat" id="empty">32</span></h3>
+                    <h3>Taken seats: <span class="stat" id="full">0</span></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="scripts/organiser.js"></script>
+</body>
+</html>
