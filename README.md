@@ -10,7 +10,9 @@ The first task was to create a teaser landing page for a fictional event named P
 informations and graphical designs to attract people. The final task was to make a tool with wich the admins can arrange seats. Double click for a new seat (you can rename it), drag-and-drop for moving. It features a saving, reload from file, export, and autosave.
 
 Pre-landing page for the event: https://cocky-jennings-8df898.netlify.app/part1.html
+
 The full event page: https://cocky-jennings-8df898.netlify.app/part2.html
+
 Seat reservation toll for the admin: https://cocky-jennings-8df898.netlify.app/part3.html
 
 ### Author ###
